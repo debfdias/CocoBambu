@@ -6,9 +6,13 @@ import authMiddleware from './app/middlewares/auth'
 
 const routes = new Router()
 
+routes.get("/", async (req, res) => {
+  res.send("Coco Bambu API is running!")
+});
+
 routes.post('/signin', UserController.signin)
 
-routes.get('/recipe/:id?', authMiddleware, RecipeController.show)
-routes.get('/recipe', authMiddleware, RecipeController.list)
+routes.get('/recipe/:id?',  RecipeController.show)
+routes.get('/recipes', authMiddleware, RecipeController.list)
 
 export default routes

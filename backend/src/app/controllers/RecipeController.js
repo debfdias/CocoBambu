@@ -1,11 +1,13 @@
 import * as Yup from 'yup';
 
 import Recipe from "../models/Recipe";
+import User from "../models/User";
 
 class RecipeController {
 
 	async show(req, res) {
-		const {id} = req;
+
+		const id = req.params.id;
 
 		const recipe = await Recipe.findOne({
 			where: {
@@ -17,14 +19,7 @@ class RecipeController {
 	}
 
 	async list(req, res) {
-		const {id} = req;
-
-		const recipe = await Recipe.findAll({
-			where: {
-				id: id,
-			},
-			order: [ [ 'createdAt', 'DESC' ]],
-		});
+		const recipe = await Recipe.findAll();
 
 		return res.status(200).json(recipe)
 	}
